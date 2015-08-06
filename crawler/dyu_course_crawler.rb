@@ -92,7 +92,7 @@ class DaYehUniversityCrawler
   doc.css('div[class="row"]').map{|row| row}.each do |row|
    data = row.css('div').map{|td| td.text}
    data[-1] = "http://syl.dyu.edu.tw/" + row.css('div a').map{|a| a[:href]}[0]
-   course_id = Nokogiri::HTML(RestClient.get(data[-1])).css('#cour1 > div:nth-child(4) > div.row_info').text.split('/')[-1][1..-2]
+   course_code = Nokogiri::HTML(RestClient.get(data[-1])).css('#cour1 > div:nth-child(4) > div.row_info').text.split('/')[-1][1..-2]
 
    time_period_regex = /(?<day>[一二三四五六日])+\)(?<period>\w+)\/(?<loc>.+)/
    course_time_location = Hash[data[6].split('、').map{|time| time.scan(time_period_regex)}]
@@ -115,7 +115,7 @@ class DaYehUniversityCrawler
     name: data[3],    # 課程名稱
     lecturer: data[4],    # 授課教師
     credits: data[1].split('/')[0].to_i,    # 學分數(需要轉換成數字，可以用.to_i)
-    code: "#{@year + 1911}-#{@term}-#{data[2]}-#{course_id}",
+    code: "#{@year + 1911}-#{@term}-#{data[2]}-#{course_code}",
     # general_code: course_id,    # 選課代碼
     url: data[-1],    # 課程大綱之類的連結(如果有的話)
     required: data[1].split('/')[-1],    # 必修或選修
