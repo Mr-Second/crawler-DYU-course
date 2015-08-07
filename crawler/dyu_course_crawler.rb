@@ -114,36 +114,36 @@ class DaYehUniversityCrawler
     term: @term,    # 學期 (第一學期=1，第二學期=2)
     name: data[3],    # 課程名稱
     lecturer: data[4],    # 授課教師
-    credits: data[1].split('/')[0].to_i,    # 學分數(需要轉換成數字，可以用.to_i)
+    credits: data[1].split('/')[0].to_i,    # 學分數
     code: "#{@year + 1911}-#{@term}-#{data[2]}-?(#{course_code})?",
-    # general_code: course_id,    # 選課代碼
-    url: data[-1],    # 課程大綱之類的連結(如果有的話)
-    required: data[1].split('/')[-1],    # 必修或選修
+    # general_code: course_code,    # 選課代碼
+    url: data[-1],    # 課程大綱之類的連結
+    required: data[1].split('/')[-1].include?('必'),    # 必修或選修
     department: dept_n,    # 開課系所
     # department_code: dept_c,
     note: data[7],    # 備註
-    day_1: course_days[0],    # 第一天第一堂課的星期
-    day_2: course_days[1],    # 範例 (三)1,2 在 XX教室上課
-    day_3: course_days[2],    # day_1 = 三
-    day_4: course_days[3],    # day_2 = 三
+    day_1: course_days[0],
+    day_2: course_days[1],
+    day_3: course_days[2],
+    day_4: course_days[3],
     day_5: course_days[4],
     day_6: course_days[5],
     day_7: course_days[6],
     day_8: course_days[7],
     day_9: course_days[8],
-    period_1: course_periods[0],    # 第一天第一堂課的節次
-    period_2: course_periods[1],    # 範例同上
-    period_3: course_periods[2],    # period_1 = 1
-    period_4: course_periods[3],    # period_2 = 2
+    period_1: course_periods[0],
+    period_2: course_periods[1],
+    period_3: course_periods[2],
+    period_4: course_periods[3],
     period_5: course_periods[4],
     period_6: course_periods[5],
     period_7: course_periods[6],
     period_8: course_periods[7],
     period_9: course_periods[8],
-    location_1: course_locations[0],    # 第一天第一堂課教室
-    location_2: course_locations[1],    # 範例同上
-    location_3: course_locations[2],    # location_1 = XX
-    location_4: course_locations[3],    # location_2 = XX
+    location_1: course_locations[0],
+    location_2: course_locations[1],
+    location_3: course_locations[2],
+    location_4: course_locations[3],
     location_5: course_locations[4],
     location_6: course_locations[5],
     location_7: course_locations[6],
